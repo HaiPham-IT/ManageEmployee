@@ -1,0 +1,21 @@
+version: '3.4'
+services:
+  server:
+    image: manageemployee
+    build: .
+    environment:
+      DB_NAME: manageemployeedb
+      DB_HOST: mongo
+      DB_PORT: 27017
+    ports:
+      - 3000:3000
+    volumes:
+      - ./server:/usr/src/app
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - data:/data/db
+volumes:
+  data:

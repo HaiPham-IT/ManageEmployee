@@ -1,0 +1,609 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Manage Employee",
+    "description": "",
+    "version": "1.0"
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "host": "localhost:3000",
+  "basePath": "/",
+  "paths": {
+    "/api/v1/login": {
+      "post": {
+        "description": "Get Token",
+        "summary": "Get Token",
+        "tags": ["Authen"],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "application/json",
+            "required": true,
+            "enum": ["application/json"]
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginInfo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login successfull",
+            "schema": {
+              "$ref": "#/definitions/LoginInfo"
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "500": {
+              "description": "Server Error"
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/employee": {
+      "post": {
+        "description": "Create Employee",
+        "summary": "Create Employee",
+        "tags": ["Employee"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer tokenValue<br>or<br>\n",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "application/json",
+            "required": true,
+            "type": "string",
+            "enum": ["application/json"]
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref":"#/definitions/Employee"
+            }
+          },
+          "401": {
+            "description": "Authentication failed"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "get": {
+        "description": "Get All Employee",
+        "summary": "Get All Employee",
+        "tags": ["Employee"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer tokenValue<br>or<br>\n",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Employee"
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update Employee",
+        "summary": "Update Employee",
+        "tags": ["Employee"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer tokenValue<br>or<br>\n",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "application/json",
+            "required": true,
+            "type": "string",
+            "enum": ["application/json"]
+          },
+          {
+            "name" : "id",
+            "in": "query",
+            "description": "Production Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            }
+          },
+          "404": {
+            "description": "? not found"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/v2/employee/{id}": {
+      "delete": {
+        "description": "Delete Employee by Id",
+        "summary": "Delete Employee by Id",
+        "tags": ["Employee"],
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer tokenValue<br>or<br>\n",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Employee Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successfull"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/v2/team": {
+      "post": {
+        "description": "Create Team",
+        "summary": "Create Team",
+        "tags": ["Team"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer tokenValue<br>or<br>\n",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "application/json",
+            "required": true,
+            "type": "string",
+            "enum": ["application/json"]
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Team"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref":"#/definitions/Team"
+            }
+          },
+          "401": {
+            "description": "Authentication failed"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "get": {
+        "description": "Get All Team",
+        "summary": "Get All Team",
+        "tags": ["Team"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer tokenValue<br>or<br>\n",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Team"
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update Team",
+        "summary": "Update Team",
+        "tags": ["Team"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer tokenValue<br>or<br>\n",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "application/json",
+            "required": true,
+            "type": "string",
+            "enum": ["application/json"]
+          },
+          {
+            "name" : "id",
+            "in": "query",
+            "description": "Team Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Team"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Modify successfull"
+          },
+          "404": {
+            "description": "<> not found"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/v2/team/{id}": {
+      "delete": {
+        "description": "Delete Team by Id",
+        "summary": "Delete Team by Id",
+        "tags": ["Team"],
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer tokenValue<br>or<br>\n",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Team Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successfull"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/v2/dept": {
+      "post": {
+        "description": "Create Departmance",
+        "summary": "Create Department",
+        "tags": ["Department"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer tokenValue<br>or<br>\n",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "application/json",
+            "required": true,
+            "type": "string",
+            "enum": ["application/json"]
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dept"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref":"#/definitions/Dept"
+            }
+          },
+          "401": {
+            "description": "Authentication failed"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "get": {
+        "description": "Get All Department",
+        "summary": "Get All Department",
+        "tags": ["Department"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer tokenValue<br>or<br>\n",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Dept"
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update Department",
+        "summary": "Update Department",
+        "tags": ["Department"],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer tokenValue<br>or<br>\n",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "application/json",
+            "required": true,
+            "type": "string",
+            "enum": ["application/json"]
+          },
+          {
+            "name" : "id",
+            "in": "query",
+            "description": "Team Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "description": "Request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dept"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Modify successfull"
+          },
+          "404": {
+            "description": "<> not found"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/api/v2/dept/{id}": {
+      "delete": {
+        "description": "Delete department by Id",
+        "summary": "Delete department by Id",
+        "tags": ["Department"],
+        "parameters":[
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer tokenValue<br>or<br>\n",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Department Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successfull"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions":{
+    "LoginInfo": {
+      "description": "Login infomation",
+      "required": ["username", "password"],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Username"
+        },
+        "password": {
+          "type": "string",
+          "description": "Password"
+        }
+      }
+    },
+    "Employee": {
+      "description": "Employee body",
+      "required": ["password"],
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "Password"
+        },
+        "info": {
+          "type": "object",
+          "required": ["role", "fullname"],
+          "properties": {
+            "fullname": {
+              "type": "string",
+              "description": "FullName"
+            },
+            "phone": {
+              "type": "string",
+              "description": "Number Phone"
+            },
+            "role": {
+              "type": "string",
+              "description": "Role",
+              "enum": ["GD", "TP", "TL", "MB"]
+            }
+          }
+        }
+      }
+    },
+    "Team": {
+      "description": "Team body",
+      "required": ["project_name", "manage_by", "member", "dept"],
+      "properties": {
+        "project_name": {
+          "type": "string",
+          "description": "Project's name or Team's name"
+        },
+        "manage_by": {
+          "type": "string",
+          "description": "Employee code(emp_code) of person who manage the project"
+        },
+        "member": {
+          "type": "array",
+          "items":{
+            "type": "string"
+          },
+          "description": "List employee code(emp_code)"
+        },
+        "dept": {
+          "description": "Department name",
+          "type": "string"
+        }
+      }
+    },
+    "Dept": {
+      "description": "Department body",
+      "required": ["name", "team", "managed_by"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Department's name"
+        },
+        "managed_by": {
+          "type": "string",
+          "description": "Employee code(emp_code) of person who manage the department"
+        }
+      }
+    }
+  }
+}
